@@ -6,14 +6,23 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "SITES")
-public class Sites {
-	@Id
-	@Column(name = "domain", length = 50)
+@Table(name = "\"SITE\"")
+public class Site {
+
 	private String domain;
-	@Column(name = "name", length = 20)
 	private String name;
 
+	public Site(String domain, String name) {
+		this.domain = domain;
+		this.name = name;
+	}
+
+	public Site() {
+
+	}
+
+	@Id
+	@Column(name = "DOMAIN", length = 50)
 	public String getDomain() {
 		return domain;
 	}
@@ -22,21 +31,13 @@ public class Sites {
 		this.domain = domain;
 	}
 
+	@Column(name = "NAME", length = 20)
 	public String getName() {
 		return name;
 	}
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public Sites(String domain, String name) {
-		this.domain = domain;
-		this.name = name;
-	}
-	
-	public Sites() {
-
 	}
 
 }

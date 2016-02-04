@@ -1,18 +1,17 @@
- 
-CREATE table "SITES" (
+
+CREATE table "SITE" (
     "DOMAIN"     VARCHAR2(100) NOT NULL primary key,
-    "NAME"       VARCHAR2(40) NOT NULL,
-	UNIQUE ("DOMAIN", "NAME")
+    "NAME"       VARCHAR2(40) NOT NULL
 );
 
-CREATE table "USERS" (
-    "ID"     	  NUMBER NOT NULL primary key,
+CREATE table "USER" (
+    "USER_ID"     NUMBER NOT NULL primary key,
     "EMAIL"       VARCHAR2(60) NOT NULL UNIQUE,
     "LOGIN"       VARCHAR2(40) NOT NULL UNIQUE,
     "PASSWORD"    VARCHAR2(40) NOT NULL
 );
 
-CREATE table "STATIONS" (
+CREATE table "STATION" (
     "ID"     	  VARCHAR2(30) NOT NULL primary key,
     "COUNTRY"     VARCHAR2(60) NOT NULL,
     "CITY"        VARCHAR2(30) NOT NULL,
@@ -20,7 +19,19 @@ CREATE table "STATIONS" (
 	UNIQUE("COUNTRY", "CITY", "NAME")
 );
 
-CREATE table "REQUESTS" (
+CREATE table "REQUEST" (
+    "REQUEST_ID"     	  	NUMBER NOT NULL primary key,
+    "USER_ID"     			NUMBER NOT NULL,
+    "FROM"        			VARCHAR2(30) NOT NULL,
+    "TO"        			VARCHAR2(30) NOT NULL,
+	"DATE"        			DATE,
+    "TRANSPORT_TYPE"        VARCHAR2(10) DEFAULT 'ALL',
+	CHECK ("TRANSPORT_TYPE" IN ('plane', 'train', 'ALL'))
+);
+
+
+/**
+CREATE table "REQUEST" (
     "REQUEST_ID"     	  	NUMBER NOT NULL primary key,
     "USER_ID"     			NUMBER NOT NULL,
     "FROM"        			VARCHAR2(30) NOT NULL,
@@ -28,7 +39,9 @@ CREATE table "REQUESTS" (
 	"DATE"        			DATE,
     "TRANSPORT_TYPE"        VARCHAR2(10) DEFAULT 'ALL',
 	CHECK ("TRANSPORT_TYPE" IN ('plane', 'train', 'ALL')),
-	FOREIGN KEY ("USER_ID") REFERENCES "USERS" ("ID"),
-	FOREIGN KEY ("FROM") REFERENCES "STATIONS" ("ID"),
-	FOREIGN KEY ("TO") REFERENCES "STATIONS" ("ID")
+	FOREIGN KEY ("USER_ID") REFERENCES "USER" ("USER_ID"),
+	FOREIGN KEY ("FROM") REFERENCES "STATION" ("ID"),
+	FOREIGN KEY ("TO") REFERENCES "STATION" ("ID")
 );
+*/
+
