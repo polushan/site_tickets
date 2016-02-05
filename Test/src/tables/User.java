@@ -1,8 +1,8 @@
 package tables;
 
-import java.util.LinkedHashSet;
-import java.util.Set;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -22,7 +22,7 @@ public class User {
 	private String email;
 	private String login;
 	private String password;
-	private Set<Request> history = new LinkedHashSet<Request>();
+	private List<Request> history;
 
 	public User(String email, String login, String password) {
 		this.email = email;
@@ -34,13 +34,13 @@ public class User {
 
 	}
 
-	@OneToMany(fetch = FetchType.LAZY/* , mappedBy = "user" */)
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "USER_ID")
-	public Set<Request> getHistory() {
+	public List<Request> getHistory() {
 		return history;
 	}
 
-	public void setHistory(Set<Request> history) {
+	public void setHistory(List<Request> history) {
 		this.history = history;
 	}
 

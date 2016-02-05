@@ -1,9 +1,8 @@
 package tables;
 
 import java.util.Date;
-import java.util.ArrayList;
-import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -11,7 +10,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -29,16 +27,9 @@ public class Request {
 	private Date date;
 	private String transportType;
 	private User user;
+	private Station fromStation;
+	private Station toStation;
 
-	/*
-	 * @OneToMany(fetch = FetchType.LAZY) private List<Station> fromAndTo = new
-	 * ArrayList<Station>(2);
-	 * 
-	 * public List<Station> getFromAndTo() { return fromAndTo; }
-	 * 
-	 * public void setFromAndTo(List<Station> fromAndTo) { this.fromAndTo =
-	 * fromAndTo; }
-	 */
 	public Request(Long requestId, Long userId, String from, String to, Date date, String transportType) {
 		this.requestId = requestId;
 		UserId = userId;
@@ -51,8 +42,29 @@ public class Request {
 	public Request() {
 
 	}
-
+	
+	
 	@ManyToOne(fetch = FetchType.LAZY, optional = true)
+	@JoinColumn(name = "ID", insertable = false, updatable = false)
+	public Station getFromStation() {
+		return fromStation;
+	}
+
+	public void setFromStation(Station fromStation) {
+		this.fromStation = fromStation;
+	}
+
+	@ManyToOne(cascade= {CascadeType.REFRESH}, fetch = FetchType.LAZY, optional = true)
+	@JoinColumn(name = "ID", insertable = false, updatable = false)
+	public Station getToStation() {
+		return toStation;
+	}
+
+	public void setToStation(Station toStation) {
+		this.toStation = toStation;
+	}
+
+	@ManyToOne(cascade= {CascadeType.REFRESH}, fetch = FetchType.LAZY, optional = true)
 	@JoinColumn(name = "USER_ID", insertable = false, updatable = false)
 	public User getUser() {
 		return user;
