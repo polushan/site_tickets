@@ -1,0 +1,30 @@
+
+CREATE table "SITE" (
+    "DOMAIN"     VARCHAR2(100) NOT NULL primary key,
+    "NAME"       VARCHAR2(40) NOT NULL
+);
+
+CREATE table "USER" (
+    "USER_ID"     NUMBER NOT NULL primary key,
+    "EMAIL"       VARCHAR2(60) NOT NULL UNIQUE,
+    "LOGIN"       VARCHAR2(40) NOT NULL UNIQUE,
+    "PASSWORD"    VARCHAR2(40) NOT NULL
+);
+
+CREATE table "CITY" (
+    "ID"     	  VARCHAR2(6) NOT NULL primary key,
+    "NAME"        VARCHAR2(30) NOT NULL UNIQUE
+);
+
+CREATE table "REQUEST" (
+    "REQUEST_ID"     	  	NUMBER NOT NULL primary key,
+    "USER_ID"     			NUMBER NOT NULL,
+    "FROM"        			VARCHAR2(30) NOT NULL,
+    "TO"        			VARCHAR2(30) NOT NULL,
+	"DATE"        			DATE,
+    "TRANSPORT_TYPE"        VARCHAR2(10) DEFAULT 'ALL',
+	CHECK ("TRANSPORT_TYPE" IN ('plane', 'train', 'bus', 'ALL'))
+);
+
+alter table "REQUEST" add constraint FKi2lsyejfy01dui45yf38xut8j foreign key ("TO") references "CITY";
+alter table "REQUEST" add constraint FKq4epm0kgsnjtemw2wl6qo0on0 foreign key ("FROM") references "CITY";
