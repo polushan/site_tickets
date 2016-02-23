@@ -25,7 +25,6 @@ public class RequestSender {
 		String from = userRequest.getFrom();
 		String to = userRequest.getTo();
 		String transportType = userRequest.getTransportType();
-
 		if (!"".equals(date)) {
 			date = "&date=" + date;
 		}

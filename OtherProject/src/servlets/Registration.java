@@ -9,8 +9,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.Factory;
 import dao.UserDAO;
-import dao.impl.Factory;
 import tables.User;
 import util.MailSender;
 import util.Ñryptographer;

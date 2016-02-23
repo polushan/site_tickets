@@ -9,7 +9,10 @@ import javax.persistence.Table;
 @Table(name = "\"SITE\"")
 public class Site {
 
+	@Id
+	@Column(name = "DOMAIN", length = 50)
 	private String domain;
+	@Column(name = "NAME", length = 20)
 	private String name;
 
 	public Site(String domain, String name) {
@@ -21,8 +24,6 @@ public class Site {
 
 	}
 
-	@Id
-	@Column(name = "DOMAIN", length = 50)
 	public String getDomain() {
 		return domain;
 	}
@@ -31,7 +32,6 @@ public class Site {
 		this.domain = domain;
 	}
 
-	@Column(name = "NAME", length = 20)
 	public String getName() {
 		return name;
 	}

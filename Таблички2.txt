@@ -8,7 +8,7 @@ CREATE table "USER" (
     "USER_ID"     NUMBER NOT NULL primary key,
     "EMAIL"       VARCHAR2(60) NOT NULL UNIQUE,
     "LOGIN"       VARCHAR2(40) NOT NULL UNIQUE,
-    "PASSWORD"    VARCHAR2(40) NOT NULL
+    "PASSWORD"    VARCHAR2(64) NOT NULL
 );
 
 CREATE table "CITY" (
@@ -28,3 +28,6 @@ CREATE table "REQUEST" (
 
 alter table "REQUEST" add constraint FKi2lsyejfy01dui45yf38xut8j foreign key ("TO") references "CITY";
 alter table "REQUEST" add constraint FKq4epm0kgsnjtemw2wl6qo0on0 foreign key ("FROM") references "CITY";
+Exec DBMS_XDB.SETHTTPPORT(8087); //Смена порта
+
+HomeSQL WorkshopUtilitiesData Workshop

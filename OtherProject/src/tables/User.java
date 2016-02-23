@@ -1,6 +1,7 @@
 package tables;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -8,7 +9,6 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -18,11 +18,20 @@ import org.hibernate.annotations.GenericGenerator;
 @Table(name = "\"USER\"")
 public class User {
 
+	@Id
+	@GeneratedValue(generator = "increment")
+	@GenericGenerator(name = "increment", strategy = "increment")
+	@Column(name = "USER_ID", unique = true, nullable = false)
 	private Long id;
+	@Column(name = "EMAIL", unique = true, nullable = false, length = 30)
 	private String email;
+	@Column(name = "LOGIN", unique = true, nullable = false, length = 20)
 	private String login;
+	@Column(name = "PASSWORD", nullable = false, length = 16)
 	private String password;
-	private ArrayList<Request> history;
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "user")
+	//@JoinColumn(name = "USER_ID")
+	private List<Request> history;
 
 	public User(String email, String login, String password) {
 		this.email = email;
@@ -34,20 +43,16 @@ public class User {
 
 	}
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinColumn(name = "USER_ID")
 	public ArrayList<Request> getHistory() {
-		return history;
+		ArrayList<Request> result = new ArrayList<Request>();
+		result.addAll(history);
+		return result;
 	}
 
-	public void setHistory(ArrayList<Request> history) {
+	public void setHistory(List<Request> history) {
 		this.history = history;
 	}
 
-	@Id
-	@GeneratedValue(generator = "increment")
-	@GenericGenerator(name = "increment", strategy = "increment")
-	@Column(name = "USER_ID", unique = true, nullable = false)
 	public Long getId() {
 		return id;
 	}
@@ -56,7 +61,6 @@ public class User {
 		this.id = id;
 	}
 
-	@Column(name = "EMAIL", unique = true, nullable = false, length = 30)
 	public String getEmail() {
 		return email;
 	}
@@ -65,7 +69,6 @@ public class User {
 		this.email = email;
 	}
 
-	@Column(name = "LOGIN", unique = true, nullable = false, length = 20)
 	public String getLogin() {
 		return login;
 	}
@@ -74,7 +77,6 @@ public class User {
 		this.login = login;
 	}
 
-	@Column(name = "PASSWORD", nullable = false, length = 20)
 	public String getPassword() {
 		return password;
 	}

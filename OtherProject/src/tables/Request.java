@@ -20,14 +20,30 @@ import org.hibernate.annotations.GenericGenerator;
 @Table(name = "\"REQUEST\"")
 public class Request {
 
+	@Id
+	@GeneratedValue(generator = "increment")
+	@GenericGenerator(name = "increment", strategy = "increment")
+	@Column(name = "REQUEST_ID", unique = true, nullable = false)
 	private Long requestId;
+	@Column(name = "USER_ID", nullable = false)
 	private Long userId;
+	@Column(name = "FROM", nullable = false, length = 15)
 	private String from;
+	@Column(name = "TO", nullable = false, length = 15)
 	private String to;
+	@Column(name = "DATE")
+	@Temporal(value = TemporalType.DATE)
 	private Date date;
+	@Column(name = "TRANSPORT_TYPE", length = 10)
 	private String transportType;
+	@ManyToOne(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY, optional = true)
+	@JoinColumn(name = "USER_ID", insertable = false, updatable = false)
 	private User user;
+	@ManyToOne(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY, optional = true)
+	@JoinColumn(name = "ID", insertable = false, updatable = false)
 	private City fromStation;
+	@ManyToOne(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY, optional = true)
+	@JoinColumn(name = "ID", insertable = false, updatable = false)
 	private City toStation;
 
 	public Request(Long requestId, Long userId, String from, String to, Date date, String transportType) {
@@ -42,10 +58,7 @@ public class Request {
 	public Request() {
 
 	}
-	
-	
-	@ManyToOne(cascade= {CascadeType.ALL}, fetch = FetchType.LAZY, optional = true)
-	@JoinColumn(name = "ID", insertable = false, updatable = false)
+
 	public City getFromStation() {
 		return fromStation;
 	}
@@ -54,8 +67,6 @@ public class Request {
 		this.fromStation = fromStation;
 	}
 
-	@ManyToOne(cascade= {CascadeType.ALL}, fetch = FetchType.LAZY, optional = true)
-	@JoinColumn(name = "ID", insertable = false, updatable = false)
 	public City getToStation() {
 		return toStation;
 	}
@@ -64,8 +75,6 @@ public class Request {
 		this.toStation = toStation;
 	}
 
-	@ManyToOne(cascade= {CascadeType.ALL}, fetch = FetchType.LAZY, optional = true)
-	@JoinColumn(name = "USER_ID", insertable = false, updatable = false)
 	public User getUser() {
 		return user;
 	}
@@ -74,10 +83,6 @@ public class Request {
 		this.user = user;
 	}
 
-	@Id
-	@GeneratedValue(generator = "increment")
-	@GenericGenerator(name = "increment", strategy = "increment")
-	@Column(name = "REQUEST_ID", unique = true, nullable = false)
 	public Long getRequestId() {
 		return requestId;
 	}
@@ -86,7 +91,6 @@ public class Request {
 		this.requestId = requestId;
 	}
 
-	@Column(name = "USER_ID", nullable = false)
 	public Long getUserId() {
 		return userId;
 	}
@@ -95,7 +99,6 @@ public class Request {
 		this.userId = userId;
 	}
 
-	@Column(name = "FROM", nullable = false, length = 15)
 	public String getFrom() {
 		return from;
 	}
@@ -104,7 +107,6 @@ public class Request {
 		this.from = from;
 	}
 
-	@Column(name = "TO", nullable = false, length = 15)
 	public String getTo() {
 		return to;
 	}
@@ -113,8 +115,6 @@ public class Request {
 		this.to = to;
 	}
 
-	@Column(name = "DATE")
-	@Temporal(value = TemporalType.DATE)
 	public Date getDate() {
 		return date;
 	}
@@ -123,7 +123,6 @@ public class Request {
 		this.date = date;
 	}
 
-	@Column(name = "TRANSPORT_TYPE", length = 10)
 	public String getTransportType() {
 		return transportType;
 	}

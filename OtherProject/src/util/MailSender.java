@@ -13,8 +13,8 @@ import javax.mail.internet.MimeMessage;
 
 public class MailSender {
 	
-	private String username = "mylodlyaetogovsego";
-    private String password = "smpl1234";
+	private String username;
+    private String password;
     private Properties props;
  
     public MailSender(String username, String password) {
@@ -27,9 +27,9 @@ public class MailSender {
         props.put("mail.smtp.host", "smtp.gmail.com");
         props.put("mail.smtp.port", "587");
     }
-    
+
     public MailSender() {
-    	new MailSender("mylodlyaetogovsego", "smpl1234");
+    	this("mylodlyaetogovsego", "smpl1234");
     }
  
     public void send(String subject, String text, String toEmail){

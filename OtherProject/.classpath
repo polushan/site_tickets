@@ -15,6 +15,6 @@
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Hibernate"/>
 	<classpathentry kind="lib" path="C:/oraclexe/app/oracle/product/11.2.0/server/jdbc/lib/ojdbc6.jar"/>
-	<classpathentry kind="lib" path="C:/Users/poll/Downloads/mail-1.4.7.jar"/>
+	<classpathentry kind="lib" path="C:/Users/poll/Downloads/javax.mail-1.5.5.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dao.CityDAO;
-import dao.impl.Factory;
+import dao.Factory;
 import tables.Request;
 import tables.User;
 import util.Answer;
@@ -63,10 +63,17 @@ public class Index extends Dispetcher {
 			}
 			CityDAO cityDAO = Factory.getCityDAO();
 			try {
-				userRequest.setFrom(cityDAO.getCityByName(from).getId());
-				userRequest.setTo(cityDAO.getCityByName(to).getId());
+				String fromCode = cityDAO.getCityByName(from).getId().trim();
+				String toCode = cityDAO.getCityByName(to).getId().trim();
+				if (fromCode != null && toCode != null) {
+					userRequest.setFrom(fromCode);
+					userRequest.setTo(toCode);
+				} else {
+					forward("/error.jsp", request, response);
+				}
 			} catch (SQLException e) {
 				e.printStackTrace();
+				forward("/error.jsp", request, response);
 			}
 			if (guest) {
 				request.getSession(true).setAttribute("lastRequest", userRequest);

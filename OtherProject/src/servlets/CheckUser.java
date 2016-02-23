@@ -8,7 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.impl.Factory;
+import dao.Factory;
 import tables.User;
 import util.Ñryptographer;
 

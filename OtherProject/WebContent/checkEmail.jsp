@@ -9,7 +9,7 @@
 <body>
 <p>Вам на почту было отправлен проверочный код. Введите его в форму ниже</p>
 <form action="CheckEmail" method="post">
-		Code: <input name="code" type="text" maxlength=16 /><br />
+		Code: <input name="code" type="text" /><br />
 		<input type="submit" name="enter" value="enter" />
 </form>
 </body>

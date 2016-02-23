@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.impl.Factory;
+import dao.Factory;
 import tables.User;
 
 
@@ -39,7 +39,8 @@ public class CheckEmail extends Dispetcher {
 			response.setContentType("text/html");
 			response.setCharacterEncoding("utf-8");
 			PrintWriter out = response.getWriter();
-			out.print("<b>Wrong cod</b>");
+			out.print("<b>Wrong cod</b></br>");
+			out.print("<a href=\"index.jsp\"> Перейти к поиску</a>");
 			out.close();
 			
 		}
