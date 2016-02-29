@@ -24,7 +24,6 @@ public class Registration extends Dispetcher {
 		String email = request.getParameter("email");
 		String login = request.getParameter("login");
 		String password = request.getParameter("password");
-		String caseOfFailure = "";
 		User user = null;
 		UserDAO userDAO = Factory.getUserDAO();
 		response.setContentType("text/html");
@@ -44,16 +43,13 @@ public class Registration extends Dispetcher {
 					request.getSession().setAttribute("secretCode", secretCode);
 					forward("/checkEmail.jsp", request, response);
 				} else {
-					caseOfFailure = "Login busy";
-					out.print("<b>" + caseOfFailure + "</b><br/>");
+					out.print("<b>" + "Login busy" + "</b><br/>");
 					out.close();
 					forward("/registration.jsp", request, response);
 				}
 			} else {
-				caseOfFailure = "Email busy";
-				out.print("<b>" + caseOfFailure + "</b><br/>");
+				out.print("<b>" + "Email busy" + "</b><br/>");
 				out.close();
-				forward("/registration.jsp", request, response);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -5,6 +5,12 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
+/**
+ * 
+ * Этот класс парсит ответ с яндекса
+ *
+ */
+
 public class Answer {
 	private ArrayList<String> to;
 	private ArrayList<String> from;
@@ -22,15 +28,17 @@ public class Answer {
 		arrival = new ArrayList<String>();
 		departure = new ArrayList<String>();
 		Element element;
-		for (int i = 0; i < threads.getLength(); i++) {
-			element = (Element) threads.item(i);
-			to.add(element.getElementsByTagName("to").item(0).getChildNodes().item(5).getTextContent());
-			from.add(element.getElementsByTagName("from").item(0).getChildNodes().item(5).getTextContent());
-			title.add(element.getElementsByTagName("thread").item(0).getChildNodes().item(3).getTextContent());
-			transportType
-					.add(element.getElementsByTagName("thread").item(0).getChildNodes().item(15).getTextContent());
-			arrival.add(element.getElementsByTagName("arrival").item(0).getTextContent());
-			departure.add(element.getElementsByTagName("departure").item(0).getTextContent());
+		if (threads.getLength() > 1) {
+			for (int i = 0; i < threads.getLength(); i++) {
+				element = (Element) threads.item(i);
+				to.add(element.getElementsByTagName("to").item(0).getChildNodes().item(5).getTextContent());
+				from.add(element.getElementsByTagName("from").item(0).getChildNodes().item(5).getTextContent());
+				title.add(element.getElementsByTagName("thread").item(0).getChildNodes().item(3).getTextContent());
+				transportType
+						.add(element.getElementsByTagName("thread").item(0).getChildNodes().item(15).getTextContent());
+				arrival.add(element.getElementsByTagName("arrival").item(0).getTextContent());
+				departure.add(element.getElementsByTagName("departure").item(0).getTextContent());
+			}
 		}
 	}
 

@@ -14,73 +14,32 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import org.hibernate.annotations.GenericGenerator;
-
 @Entity
 @Table(name = "\"REQUEST\"")
 public class Request {
 
 	@Id
-	@GeneratedValue(generator = "increment")
-	@GenericGenerator(name = "increment", strategy = "increment")
-	@Column(name = "REQUEST_ID", unique = true, nullable = false)
+	@GeneratedValue//(generator = "increment")
+	//@GenericGenerator(name = "increment", strategy = "increment")
+	@Column(name = "REQUEST_ID")
 	private Long requestId;
 	@Column(name = "USER_ID", nullable = false)
 	private Long userId;
-	@Column(name = "FROM", nullable = false, length = 15)
-	private String from;
-	@Column(name = "TO", nullable = false, length = 15)
-	private String to;
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = true)
+	@JoinColumn(name = "FROM", nullable = false)
+	private City from;
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = true)
+	@JoinColumn(name = "TO", nullable = false)
+	private City to;
 	@Column(name = "DATE")
 	@Temporal(value = TemporalType.DATE)
 	private Date date;
 	@Column(name = "TRANSPORT_TYPE", length = 10)
 	private String transportType;
-	@ManyToOne(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY, optional = true)
-	@JoinColumn(name = "USER_ID", insertable = false, updatable = false)
-	private User user;
-	@ManyToOne(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY, optional = true)
-	@JoinColumn(name = "ID", insertable = false, updatable = false)
-	private City fromStation;
-	@ManyToOne(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY, optional = true)
-	@JoinColumn(name = "ID", insertable = false, updatable = false)
-	private City toStation;
-
-	public Request(Long requestId, Long userId, String from, String to, Date date, String transportType) {
-		this.requestId = requestId;
-		this.userId = userId;
-		this.from = from;
-		this.to = to;
-		this.date = date;
-		setTransportType(transportType);
-	}
 
 	public Request() {
-
-	}
-
-	public City getFromStation() {
-		return fromStation;
-	}
-
-	public void setFromStation(City fromStation) {
-		this.fromStation = fromStation;
-	}
-
-	public City getToStation() {
-		return toStation;
-	}
-
-	public void setToStation(City toStation) {
-		this.toStation = toStation;
-	}
-
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
+		transportType = "ALL";
+		date = null;
 	}
 
 	public Long getRequestId() {
@@ -98,20 +57,20 @@ public class Request {
 	public void setUserId(Long userId) {
 		this.userId = userId;
 	}
-
-	public String getFrom() {
+	
+	public City getFrom() {
 		return from;
 	}
 
-	public void setFrom(String from) {
+	public void setFrom(City from) {
 		this.from = from;
 	}
 
-	public String getTo() {
+	public City getTo() {
 		return to;
 	}
 
-	public void setTo(String to) {
+	public void setTo(City to) {
 		this.to = to;
 	}
 

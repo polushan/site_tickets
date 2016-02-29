@@ -14,16 +14,22 @@ import org.xml.sax.SAXException;
 
 import tables.Request;
 
+/**
+ * 
+ * Класс для отправки реквеста пользователя
+ *
+ */
+
 public class RequestSender {
 
 	private static final String apiKey = "b13b8a87-53d2-4b5a-832b-7d6d7e1cf59a";
 	private static final String yandex = "https://api.rasp.yandex.net/v1.0/search/?";
 	private static final String tail = "&system=iata";
 
-	public static Document sendRequest(Request userRequest, String date) throws SomethingWrongException, IOException{
+	public static synchronized Document sendRequest(Request userRequest, String date) throws SomethingWrongException, IOException{
 
-		String from = userRequest.getFrom();
-		String to = userRequest.getTo();
+		String from = userRequest.getFrom().getId().trim();
+		String to = userRequest.getTo().getId().trim();
 		String transportType = userRequest.getTransportType();
 		if (!"".equals(date)) {
 			date = "&date=" + date;

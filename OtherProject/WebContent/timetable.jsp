@@ -9,7 +9,7 @@
 </head>
 <body>
 <table border="1">
-		<caption>Последние завопросы</caption>
+		<caption>Результат запроса</caption>
 		<tr>
 			<th>Куда</th>
 			<th>Откуда</th>			
@@ -26,6 +26,7 @@
 	List<String> transportType = answer.gettransportType();
 	List<String> arrival = answer.getArrival();
 	List<String> departure = answer.getDeparture();	
+	if (!to.isEmpty()) {
 	for (int i = 0; i < to.size(); i++) {
 		 out.println("<tr>");
 		 out.println("<td>" + to.get(i) + "</td>");
@@ -36,8 +37,12 @@
 		 out.println("<td>" + departure.get(i) + "</td>");
 		 out.println("</tr>");
 	}
+	} else {
+		out.println("<b>" + "Ничего не найдено" + "</b>");
+	}
 	
 	%>
 </table>
+<a href="index.jsp"> Назад</a>
 </body>
 </html>

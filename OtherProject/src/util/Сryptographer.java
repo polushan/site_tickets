@@ -4,8 +4,14 @@ import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+/**
+ * 
+ *Этот класс нужен, чтобы выдавать md5
+ *
+ */
+
 public class Сryptographer {
-	public static String md5Custom(String st) {
+	public static synchronized String md5Custom(String st) {
 		MessageDigest messageDigest = null;
 		byte[] digest = new byte[0];
 
