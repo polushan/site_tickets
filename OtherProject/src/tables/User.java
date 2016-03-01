@@ -8,7 +8,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -27,8 +26,8 @@ public class User {
 	private String login;
 	@Column(name = "PASSWORD", nullable = false, length = 16)
 	private String password;
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "USER_ID")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
+	//@JoinColumn(name = "USER_ID", referencedColumnName = "USER_ID")
 	private List<Request> history;
 
 	public User(String email, String login, String password) {

@@ -46,10 +46,11 @@ public class Index extends Dispetcher {
 			Request userRequest = new Request();
 			boolean guest = false;
 			if (user == null) {
-				userRequest.setUserId(new Long(0));
+				//userRequest.setUserId(new Long(0));
+				userRequest.setUserId(user);
 				guest = true;
 			} else {
-				userRequest.setUserId(user.getId());
+				//userRequest.setUserId(user.getId());
 			}
 			userRequest.setTransportType(request.getParameter("transport_type"));
 			DateFormat dateForm = new SimpleDateFormat("yyyy-MM-dd");

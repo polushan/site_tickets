@@ -23,13 +23,14 @@ public class Request {
 	//@GenericGenerator(name = "increment", strategy = "increment")
 	@Column(name = "REQUEST_ID")
 	private Long requestId;
-	@Column(name = "USER_ID", nullable = false)
-	private Long userId;
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = true)
-	@JoinColumn(name = "FROM", nullable = false)
+	@JoinColumn(name = "USER_ID")
+	private User userId;
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = true)
+	@JoinColumn(name = "FROM", nullable = false, referencedColumnName = "ID")
 	private City from;
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = true)
-	@JoinColumn(name = "TO", nullable = false)
+	@JoinColumn(name = "TO", nullable = false, referencedColumnName = "ID")
 	private City to;
 	@Column(name = "DATE")
 	@Temporal(value = TemporalType.DATE)
@@ -50,11 +51,11 @@ public class Request {
 		this.requestId = requestId;
 	}
 
-	public Long getUserId() {
+	public User getUserId() {
 		return userId;
 	}
 
-	public void setUserId(Long userId) {
+	public void setUserId(User userId) {
 		this.userId = userId;
 	}
 	
